@@ -4,8 +4,9 @@ import pickle
 
 class Data:
 
-    def __init__(self, encryptedNonce, encryptedLink, address):
+    def __init__(self, encryptedNonce, encryptedLink, key, address):
         self.address = address
+        self.key = key
         self.encryptedNonce = encryptedNonce
         self.encryptedLink = encryptedLink
 

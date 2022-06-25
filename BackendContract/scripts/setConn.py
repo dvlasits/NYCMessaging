@@ -29,7 +29,7 @@ def addObjToTalk(address):
     f = open("pubkey", "rb")
     myKey = pickle.load(f)
     f.close()
-    myData = Data(encryptedNonce, ipnsAddress, myKey)
+    myData = Data(encryptedNonce, ipnsAddress, myKey, account.address)
 
     f = open("temp", "wb")
     pickle.dump(myData, f)

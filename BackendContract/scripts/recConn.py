@@ -30,7 +30,10 @@ def recConnec():
             f = open("myConns", "rb")
             conns = pickle.load(f)
             f.close()
-            conns[data.address] = data.encryptedLink
+            conns[data.address] = (data.encryptedLink, data.key)
+            f = open("myConns", "wb")
+            pickle.dump(conns, f)
+            f.close()
 
 
 
