@@ -20,16 +20,16 @@ def updateIPNS(hashFile, name):
 
     x = result.stdout.split()[2]
     ipnsAddress = str(x)[2:-2]
-    return ipnsAddress
+    return (ipnsAddress,x)
 
 
 def createNewIPNS(nof):
     val = updateFile(nof, "test")
     result = subprocess.run(["ipfs", "key", "gen", nof], stdout=subprocess.PIPE)
 
-    ipnsAddress = updateIPNS(val,nof)
+    (ipnsAddress, real) = updateIPNS(val,nof)
 
-    return ipnsAddress
+    return (ipnsAddress, real)
 
     """val = updateFile(nof, "lol")
 

@@ -1,3 +1,5 @@
+import os
+
 from brownie import Sharer
 from scripts.helpful_scripts import get_account
 import rsa
@@ -15,8 +17,9 @@ def setup():
     f = open("pubkey", "wb")
     pickle.dump(pubkey, f)
     f.close()
-
+    os.remove("privkey")
     f = open("privkey", "wb")
+    f.truncate(0)
     pickle.dump(privkey, f)
     f.close()
 

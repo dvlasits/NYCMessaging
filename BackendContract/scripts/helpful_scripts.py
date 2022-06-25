@@ -4,15 +4,26 @@ import pickle
 
 class Data:
 
-    def __init__(self, encryptedNonce, encryptedLink):
+    def __init__(self, encryptedNonce, encryptedLink, address):
+        self.address = address
         self.encryptedNonce = encryptedNonce
         self.encryptedLink = encryptedLink
 
 
 
+def getObj(name):
+    f = open(name, "rb")
+    omj = pickle.load(f)
+    f.close()
+    return omj
+
+
+
 
 def get_account():
-    if network.show_active() == "development":
+    print("here")
+    return accounts[0]
+    if network.show_active() == "development" or network.show_active() == "ganache-local":
         return accounts[0]
     else:
         return accounts.add(config["wallets"]["from_key"])
