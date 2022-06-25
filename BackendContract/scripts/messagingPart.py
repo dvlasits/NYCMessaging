@@ -18,7 +18,9 @@ def updateFile(name, writing):
 def updateIPNS(hashFile, name):
     result = subprocess.run(["ipfs", "name", "publish","--key=" + name , "/ipfs/" + str(hashFile)[2:-1]], stdout=subprocess.PIPE)
 
-    x = result.stdout.split()[2]
+    x = result.stdout.split()
+    print(x)
+    x = x[2]
     ipnsAddress = str(x)[2:-2]
     return (ipnsAddress,x)
 

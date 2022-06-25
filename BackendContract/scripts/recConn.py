@@ -6,7 +6,6 @@ from scripts.messagingPart import *
 from pathlib import Path
 
 
-
 def recConnec():
     account = get_account()
     sharer = Sharer[-1]
