@@ -82,6 +82,23 @@
                 )
                 .catch((error) => console.log(error.message));
             }
+
+            function call_python(){
+                //create XMLHttpRequest object
+                const xhr = new XMLHttpRequest()
+                //open a get request with the remote server URL
+                xhr.open("POST", "/call_python", true)
+
+                //EVENT HANDLERS
+
+                //triggered when the response is completed
+                xhr.onload = function() {
+                    console.log(xhr.responseText)
+                }
+
+                //send the Http request
+                xhr.send("Data from JS")
+            }
         </script>
     </head>
     <body>
@@ -90,5 +107,6 @@
       <button onclick="get_public_keys()">Get public keys</button>
       <input type="text" id="decrypt-input"/>
       <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
+      <button onclick="call_python()">Call python</button>
     </body>
     </html>
