@@ -8,6 +8,7 @@
         <script src="{{url_for('static', filename='bundle.js')}}"></script>
         <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
         <script src="{{url_for('static', filename='web3_test.js')}}"></script>
+        <script src="{{url_for('static', filename='jsencrypt_bundle.js')}}"></script>
         <script src="{{url_for('static', filename='metamask_encryption.js')}}"></script>
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script>
@@ -62,9 +63,12 @@
                 document.getElementById('logged-address-value').textContent = account;
             }
 
-            async function get_private_key() {
+            function get_private_key() {
                 // retrieve the encoded private key from contract
                 // decrypt the private key
+
+                const {pubKey, privKey} = window.generate_key_pair();
+                print(pubKey);
             }
 
             function addMessage(message, side){

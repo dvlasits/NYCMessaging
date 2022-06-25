@@ -61,16 +61,22 @@ function encrypt_wrapper(message) {
     encrypted = my_encrypt(public_key_eth, message);
 
     console.log(encrypted);
+    return encrypted;
 }
 
-function decrypt(message) {
-    ethereum
+async function decrypt(message) {
+    let decrypted;
+    await ethereum
     .request({
       method: 'eth_decrypt',
       params: [message, account],
     })
-    .then((decryptedMessage) =>
-      console.log('The decrypted message is:', decryptedMessage)
+    .then((decryptedMessage) => {
+        decrypted = decryptedMessage;
+        console.log('The decrypted message is:', decryptedMessage);
+    }
     )
     .catch((error) => console.log(error.message));
+
+    return decrypted;
 }
