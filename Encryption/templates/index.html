@@ -12,10 +12,10 @@
             let accounts;
             let public_keys;
 
-            function check_metamask(){
+            async function check_metamask(){
                 if (window.ethereum) {
                     window.web3 = new Web3(ethereum);
-                    ethereum.enable()
+                    await ethereum.enable()
                         .then(() => {
                             console.log("Ethereum enabled");
                         })
@@ -29,8 +29,8 @@
                 }
             }
 
-            function get_accounts() {
-                web3.eth.getAccounts(function (err, acc) {
+            async function get_accounts() {
+                await web3.eth.getAccounts(function (err, acc) {
                     if (err != null) {
                         self.setStatus("There was an error fetching your accounts");
                         return;
@@ -44,10 +44,8 @@
                 });
             }
 
-
-
-            function get_public_keys(){
-                ethereum
+            async function get_public_keys(){
+                await ethereum
                 .request({
                   method: 'eth_getEncryptionPublicKey',
                   params: [accounts[0]], // you must have access to the specified account
@@ -124,13 +122,20 @@
                 //send the Http request
                 xhr.send("Data from JS")
             }
+
+            async function login(){
+                await check_metamask();
+                await get_accounts();
+                await get_public_keys();
+
+                document.getElementById('login-btn').textContent  = "Success!";
+                document.getElementById('login-btn').style.backgroundColor = "#11bf3d";
+            }
         </script>
     </head>
     <body>
         <div id="top-buttons">
-            <button onclick="check_metamask()">Connect to MetaMask</button>
-            <button onclick="get_accounts()">Get accounts</button>
-            <button onclick="get_public_keys()">Get public keys</button>
+            <button id="login-btn" onclick="login()">Log In!</button>
             <input type="text" id="encrypt-input"/>
             <button onclick="encrypt_wrapper(document.getElementById('encrypt-input').value)">Encrypt message</button>
             <input type="text" id="decrypt-input"/>
@@ -148,19 +153,19 @@
             </div> 
             <div>
                 <span>Address:</span>
-                <span>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
+                <span>0x7094a738526cC59CdB5E3806700d4Bd1b4f39e56</span>
             </div> 
             <div>
                 <span>Address:</span>
-                <span>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
+                <span>0xcDFF1e1738121703679bE9839F778bb1f6527E81</span>
             </div> 
             <div class="active">
                 <span>Address:</span>
-                <span>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
+                <span>0x80b6aBa3e4d22633d56Efa95708381928554A881</span>
             </div> 
             <div>
                 <span>Address:</span>
-                <span>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
+                <span>0xC137B0AB0256Df59c23a8d31B0852315e16941De</span>
             </div> 
         </div>
         <div id = "received-messages">

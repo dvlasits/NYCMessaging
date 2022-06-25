@@ -128,7 +128,7 @@ body {
 #top-buttons > button {
     padding: 1em;
     margin: 1em;
-
+    border-radius: 1em;
 }
 
 #contacts > div.active {
