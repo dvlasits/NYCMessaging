@@ -7,6 +7,7 @@
         <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
         <script src="./static/bundle.js"></script>
         <link rel="stylesheet" href="./static/styles.css">
+        <script src="./static/smart_contract.js"></script>
         <script src="./static/web3_test.js"></script>
         <script src="./static/jsencrypt_bundle.js"></script>
         <script src="./static/metamask_encryption.js"></script>
@@ -18,7 +19,7 @@
                 await get_account();
                 await get_public_key();
 
-                await get_private_key();
+                await get_encryptor();
 
                 document.getElementById('login-btn').textContent  = "Success!";
                 document.getElementById('login-btn').style.backgroundColor = "#11bf3d";
@@ -29,9 +30,6 @@
             function get_encryptor() {
                 // retrieve the encoded private key from contract
                 // decrypt the private key
-
-                const {pubKey, privKey} = generate_key_pair();
-                print(pubKey);
             }
 
             function addMessage(message, side){
