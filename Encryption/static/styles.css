@@ -48,6 +48,8 @@ body {
     border-radius: 0.5em;
 
     background-color: #a0a0a0;
+
+    cursor: pointer;
 }
 
 #received-messages {
@@ -121,8 +123,6 @@ body {
     align-items: center;
 
     flex-direction: row-reverse;
-
-    background-color: #e4761b;
 }
 
 #top-buttons > button {
@@ -133,6 +133,27 @@ body {
 
 #contacts > div.active {
     background-color: #d7c1b3;
+}
+
+#top-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    background-color: #e4761b;
+}
+
+#logged-address{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 1em;
+}
+
+#logged-address > label{
+    color: #505050;
+    font-size: smaller;
 }
 
 
