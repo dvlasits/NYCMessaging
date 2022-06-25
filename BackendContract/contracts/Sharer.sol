@@ -1,13 +1,21 @@
 // SPDX-License-Identifier: MIT
 
 
-pragma solidity ^0.6.6;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.6.0;
+//pragma experimental ABIEncoderV2;
 
 contract Sharer {
 
-    mapping(uint256 => bytes[]) public MessageRequests;
+    struct MessageRequest {
+        address sender;
+        bytes encReceiver;
+    }
 
+    //stores all message request
+    //receivers needs to go through all requests
+    //to know if he is the reciepient
+    MessageRequest[] public MessageRequests;
+    
     mapping(address => bytes) public publicKeys;
     mapping(address => bytes) public privateKeys;
 
@@ -19,11 +27,11 @@ contract Sharer {
         return publicKeys[add];
     }
 
-    function addPrivateKey(bytes memory b) public{
+    function addEncPrivateKey(bytes memory b) public{
         privateKeys[msg.sender] = b;
     }
 
-    function getPrivateKey(address add) public view returns(bytes memory){
+    function getEncPrivateKey(address add) public view returns(bytes memory){
         return privateKeys[add];
     }
 
@@ -36,11 +44,22 @@ contract Sharer {
         }
     }
 
-    function IwantToContact(bytes memory encryptedMessage, uint256 id) public {
-        MessageRequests[id].push(encryptedMessage);
+    function IwantToContact(bytes memory encryptedMessage) public {
+        MessageRequests.push(MessageRequest(msg.sender, encryptedMessage));
     }
 
-    function getDataBasic() public view returns(bytes[] memory){
-        return MessageRequests[msg.sender];
+    function getMessageRequest(uint id) public view returns(
+        address sender,
+        bytes memory encReceiver
+    )
+    {
+        sender = MessageRequests[id].sender;
+        encReceiver = MessageRequests[id].encReceiver;
     }
+
+    function getMessageRequestLength() public view returns(uint)
+    {
+        return MessageRequests.length;
+    }
+
 }
