@@ -5,6 +5,7 @@
     <head>
         <title>Using web3 API with MetaMask</title>
         <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
+        <script src="{{url_for('static', filename='bundle.js')}}"></script>
         <style>
             body {
                 display: flex;
@@ -71,6 +72,16 @@
                 });
             }
 
+            function encrypt_wrapper(message) {
+                key = public_keys;
+
+                console.log(my_encrypt)
+
+                encrypted = my_encrypt(key, message);
+
+                console.log(encrypted);
+            }
+
             function decrypt(message) {
                 ethereum
                 .request({
@@ -105,6 +116,8 @@
       <button onclick="check_metamask()">Check metamask</button>
       <button onclick="get_accounts()">Get accounts</button>
       <button onclick="get_public_keys()">Get public keys</button>
+      <input type="text" id="encrypt-input"/>
+      <button onclick="encrypt_wrapper(document.getElementById('encrypt-input').value)">Encrypt message</button>
       <input type="text" id="decrypt-input"/>
       <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
       <button onclick="call_python()">Call python</button>
