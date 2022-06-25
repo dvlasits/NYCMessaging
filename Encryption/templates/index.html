@@ -116,7 +116,9 @@
 
                 //triggered when the response is completed
                 xhr.onload = function() {
-                    console.log(xhr.responseText)
+                    console.log(xhr.responseText);
+                    document.getElementById('setup-btn').textContent  = "Success!";
+                    document.getElementById('setup-btn').style.backgroundColor = "#11bf3d";
                 }
 
                 //send the Http request
@@ -126,7 +128,7 @@
     </head>
     <body>
         <div id="top-buttons">
-            <button onclick="check_metamask()">Check metamask</button>
+            <button onclick="check_metamask()">Connect to MetaMask</button>
             <button onclick="get_accounts()">Get accounts</button>
             <button onclick="get_public_keys()">Get public keys</button>
             <input type="text" id="encrypt-input"/>
@@ -135,7 +137,7 @@
             <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
             <button onclick="call_python()">Call python</button>
 
-            <button onclick="call_setup()">Call setup</button>
+            <button id="setup-btn" onclick="call_setup()">Setup</button>
         </div>
 
       <div id="main">
@@ -152,7 +154,7 @@
                 <span>Address:</span>
                 <span>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
             </div> 
-            <div>
+            <div class="active">
                 <span>Address:</span>
                 <span>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
             </div> 

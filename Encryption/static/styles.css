@@ -1,11 +1,19 @@
 html {
     height: 100%;
+    font-family: sans-serif;
+
+    background-color: #233447;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     height: 100%;
     display: grid;
     grid-template-rows: auto 1fr;
+
+    margin: 0;
+    padding: 0;
 }
 
 #main {
@@ -17,17 +25,19 @@ body {
     display: grid;
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr auto;
-
-    padding: 1em;
 }
 
 #contacts {
     display: flex;
     flex-direction: column;
-    outline: 1px solid gray;
+    padding: 1em;
 
     grid-column: 1/2;
     grid-row: 1/3;
+
+    border-radius: 1em;
+
+    background-color: #161616;
 }
 
 #contacts > div {
@@ -47,13 +57,14 @@ body {
     grid-column: 2/3;
     grid-row: 1/2;
 
-    justify-content: flex-end
+    justify-content: flex-end;
+
+    background-color: #233447;
 }
 
 .message-left {
-    outline: 1px gray solid;
     align-self: end;
-    background-color: yellow;
+    background-color: #d7c1b3;
 
     padding: 1em;
     margin: 1em;
@@ -61,9 +72,8 @@ body {
 }
 
 .message-right {
-    outline: 1px gray solid;
     align-self: start;
-    background-color: orange;
+    background-color: #e4761b;
 
     padding: 1em;
     margin: 1em;
@@ -73,24 +83,56 @@ body {
 #write-message{
     display: grid;
     grid-template-columns: 1fr auto;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 1em;
+
+    background-color: #233447;
+
+
 }
 
 #write-message > input{
-    background-color: #a0a0a0;
+    background-color: #d7c1b3;
     margin-right: 1em;
+
+    border: 0;
+    box-shadow: none;
+
+    border-radius: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+}
+
+#write-message > button {
+    background-color: #f6851b;
+    padding: 0.5em;
+    border-radius: 0.5em;
+
+    border: 0;
+    box-shadow: none;
+
+    font-size: large;
+    text-transform: capitalize;
+
+    cursor: pointer;
 }
 
 #top-buttons {
     display: flex;
     align-items: center;
+
+    flex-direction: row-reverse;
+
+    background-color: #e4761b;
 }
 
 #top-buttons > button {
     padding: 1em;
     margin: 1em;
 
+}
+
+#contacts > div.active {
+    background-color: #d7c1b3;
 }
 
 
