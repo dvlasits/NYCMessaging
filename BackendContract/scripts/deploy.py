@@ -9,4 +9,4 @@ def deploy_sharer():
 
 
 def main():
-    deploy_fund_me()
+    deploy_sharer()
