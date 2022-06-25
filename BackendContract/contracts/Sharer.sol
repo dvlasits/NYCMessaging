@@ -28,8 +28,6 @@ contract Sharer {
 
     function getDataFrom(uint256 start) public view returns(string[] memory){
         uint256 myId = hashAddress(msg.sender);
-
-
         string[] memory lookingAt = MessageRequests[myId];
         uint256 numNew = lookingAt.length - start + 1;
         string[] memory out = new string[](numNew);
