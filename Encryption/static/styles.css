@@ -48,6 +48,8 @@ body {
     border-radius: 0.5em;
 
     background-color: #a0a0a0;
+
+    cursor: pointer;
 }
 
 #received-messages {

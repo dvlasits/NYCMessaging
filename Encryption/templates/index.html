@@ -9,8 +9,9 @@
         <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
         <script>
 
-            let accounts;
-            let public_keys;
+            let account;
+            let public_key;
+            
 
             async function check_metamask(){
                 if (window.ethereum) {
@@ -29,7 +30,7 @@
                 }
             }
 
-            async function get_accounts() {
+            async function get_account() {
                 await web3.eth.getAccounts(function (err, acc) {
                     if (err != null) {
                         self.setStatus("There was an error fetching your accounts");
@@ -39,7 +40,10 @@
                         console.log('Accounts:')
                         console.log(acc);
 
-                        accounts = acc;
+                        accounts = acc[0];
+                    }
+                    else {
+                        console.error("No account can be accessed.");
                     }
                 });
             }
@@ -48,12 +52,12 @@
                 await ethereum
                 .request({
                   method: 'eth_getEncryptionPublicKey',
-                  params: [accounts[0]], // you must have access to the specified account
+                  params: [account], // you must have access to the specified account
                 })
                 .then((result) => {
                     console.log('The public key for the first account is:')
                     console.log(result);
-                    public_keys = result;
+                    public_key = result;
                 })
                 .catch((error) => {
                   if (error.code === 4001) {
@@ -125,11 +129,18 @@
 
             async function login(){
                 await check_metamask();
-                await get_accounts();
+                await get_account();
                 await get_public_keys();
+
+                await get_private_key();
 
                 document.getElementById('login-btn').textContent  = "Success!";
                 document.getElementById('login-btn').style.backgroundColor = "#11bf3d";
+            }
+
+            async function get_private_key() {
+                // retrieve the encoded private key from contract
+                // decrypt the private key
             }
         </script>
     </head>
