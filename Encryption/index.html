@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <html>
+    <head>
+        <title>Using web3 API with MetaMask</title>
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
+        <script>
+
+            let accounts;
+            let public_keys;
+
+            function check_metamask(){
+                if (window.ethereum) {
+                    window.web3 = new Web3(ethereum);
+                    ethereum.enable()
+                        .then(() => {
+                            console.log("Ethereum enabled");
+                        })
+                        .catch(() => {
+                            console.warn('User didn\'t allow access to accounts.');
+                            waitLogin();
+                        });
+                } else {
+                    console.log("Non-Ethereum browser detected. You should consider installing MetaMask.");
+                    return;
+                }
+            }
+
+            function get_accounts() {
+                web3.eth.getAccounts(function (err, acc) {
+                    if (err != null) {
+                        self.setStatus("There was an error fetching your accounts");
+                        return;
+                    }
+                    if (acc.length > 0) {
+                        console.log('Accounts:')
+                        console.log(acc);
+
+                        accounts = acc;
+                    }
+                });
+            }
+
+
+
+            function get_public_keys(){
+                ethereum
+                .request({
+                  method: 'eth_getEncryptionPublicKey',
+                  params: [accounts[0]], // you must have access to the specified account
+                })
+                .then((result) => {
+                    console.log('The public key for the first account is:')
+                    console.log(result);
+                    public_keys = result;
+                })
+                .catch((error) => {
+                  if (error.code === 4001) {
+                    // EIP-1193 userRejectedRequest error
+                    console.log("We can't encrypt anything without the key.");
+                  } else {
+                    console.error(error);
+                  }
+                });
+            }
+
+            function decrypt(message) {
+                ethereum
+                .request({
+                  method: 'eth_decrypt',
+                  params: [message, accounts[0]],
+                })
+                .then((decryptedMessage) =>
+                  console.log('The decrypted message is:', decryptedMessage)
+                )
+                .catch((error) => console.log(error.message));
+            }
+
+            function call_python(){
+                //create XMLHttpRequest object
+                const xhr = new XMLHttpRequest()
+                //open a get request with the remote server URL
+                xhr.open("POST", "/call_python", true)
+
+                //EVENT HANDLERS
+
+                //triggered when the response is completed
+                xhr.onload = function() {
+                    console.log(xhr.responseText)
+                }
+
+                //send the Http request
+                xhr.send("Data from JS")
+            }
+        </script>
+    </head>
+    <body>
+      <button onclick="check_metamask()">Check metamask</button>
+      <button onclick="get_accounts()">Get accounts</button>
+      <button onclick="get_public_keys()">Get public keys</button>
+      <input type="text" id="decrypt-input"/>
+      <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
+      <button onclick="call_python()">Call python</button>
+    </body>
+    </html>
