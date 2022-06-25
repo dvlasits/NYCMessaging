@@ -11,8 +11,6 @@ def setup(privKey):
     account = accounts.add(privKey)
     sharer = getContract()
     bool = sharer.checkUser({"from": account})
-    if bool:
-        return
     (pubkey, privkey) = rsa.newkeys(256, poolsize=8)
     f = open("pubkey", "wb")
     pickle.dump(pubkey, f)

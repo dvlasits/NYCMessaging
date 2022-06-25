@@ -3,7 +3,7 @@ import pickle
 
 
 def getContract():
-    sharer = Sharer.at('0xf449BE6D3ebFe65A2d66Ea65aa19842251f88bEf')
+    sharer = Sharer.at('0xe129231629061e60a0f7bF8B8C24D0BE067aF824')
     return sharer
 
 class Data:

@@ -10,8 +10,6 @@ from scripts.messagingPart import *
 def addObjToTalk(address, privKey):
     account = accounts.add(privKey)
     sharer = getContract()
-    #if not sharer.checkUser(account):
-    #    return
     pubkey = sharer.getPubKey(address)
     pubkey = loadObject(pubkey)
     message = "CORRECT".encode('utf8')
