@@ -4,58 +4,23 @@
     <html>
     <head>
         <title>Using web3 API with MetaMask</title>
-        <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
-        <script src="./static/bundle.js"></script>
         <link rel="stylesheet" href="./static/styles.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
+        <script src="./static/metamask_encryption.js"></script> 
+        <!--<script src="./static/bundle.js"></script>
+        <script src="./static/smart_contract.js"></script>
         <script src="./static/web3_test.js"></script>
-        <!--<script src="./static/jsencrypt_bundle.js"></script>-->
-        <script src="./static/metamask_encryption.js"></script>
-        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+        <script src="./static/jsencrypt_bundle.js"></script>
+        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>-->
         <script>
-            /*
-            function call_python(){
-                //create XMLHttpRequest object
-                const xhr = new XMLHttpRequest()
-                //open a get request with the remote server URL
-                xhr.open("POST", "/call_python", true)
-
-                //EVENT HANDLERS
-
-                //triggered when the response is completed
-                xhr.onload = function() {
-                    console.log(xhr.responseText)
-                }
-
-                //send the Http request
-                xhr.send("Data from JS")
-            }
-
-            function call_setup(){
-                //create XMLHttpRequest object
-                const xhr = new XMLHttpRequest()
-                //open a get request with the remote server URL
-                xhr.open("POST", "/call_brownie", true)
-
-                //EVENT HANDLERS
-
-                //triggered when the response is completed
-                xhr.onload = function() {
-                    console.log(xhr.responseText);
-                    document.getElementById('setup-btn').textContent  = "Success!";
-                    document.getElementById('setup-btn').style.backgroundColor = "#11bf3d";
-                }
-
-                //send the Http request
-                xhr.send("Data from JS")
-            }
-            */
 
             async function login(){
                 await check_metamask();
                 await get_account();
                 await get_public_key();
 
-                await get_private_key();
+                await get_encryptor();
 
                 document.getElementById('login-btn').textContent  = "Success!";
                 document.getElementById('login-btn').style.backgroundColor = "#11bf3d";
@@ -63,12 +28,9 @@
                 document.getElementById('logged-address-value').textContent = account;
             }
 
-            function get_private_key() {
+            function get_encryptor() {
                 // retrieve the encoded private key from contract
                 // decrypt the private key
-
-                const {pubKey, privKey} = window.generate_key_pair();
-                print(pubKey);
             }
 
             function addMessage(message, side){

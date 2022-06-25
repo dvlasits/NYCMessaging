@@ -1,52 +1,31 @@
-const crypto = require("crypto");
+window.get_crypto_object = (password) => { 
+    var cryptico = require("cryptico");
 
-window.generate_key_pair = () => {
-    const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
-        // The standard secure default length for RSA keys is 2048 bits
-        modulusLength: 2048,
-    });
+    function cryptoObj(passPhrase)
+    {
+       this.bits = 1024; //2048;
+       this.passPhrase = passPhrase;
+       this.rsaKey = cryptico.generateRSAKey(this.passPhrase,this.bits);
+       this.rsaPublicKey = cryptico.publicKeyString(this.rsaKey);
 
-    return  { publicKey, privateKey };
+       this.encrypt = function(message){
+         var result = cryptico.encrypt(message,this.rsaPublicKey);
+         return result.cipher;
+       };
+
+       this.decrypt = function(message){
+         var result = cryptico.decrypt(message, this.rsaKey);
+         return result.plaintext;
+       };
+    }
+
+
+    return new cryptoObj(Math.random(password));
 }
 
-window.encrypt_data = (data, publicKey) => {
-    const encryptedData = crypto.publicEncrypt(
-        {
-          key: publicKey,
-          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-          oaepHash: "sha256",
-        },
-        // We convert the data string to a buffer using `Buffer.from`
-        Buffer.from(data)
-    );
-    
-    return encryptedData;
+window.encrypt_RSA = (message, publicKey) => { 
+    var cryptico = require("cryptico");
+       
+    var result = cryptico.encrypt(message,publicKey);
+    return result.cipher;
 }
-
-window.decrypt_data = (data, privateKey) => {
-    const decryptedData = crypto.privateDecrypt(
-        {
-          key: privateKey,
-          // In order to decrypt the data, we need to specify the
-          // same hashing function and padding scheme that we used to
-          // encrypt the data in the previous step
-          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-          oaepHash: "sha256",
-        },
-        data
-    );
-    
-    return decryptedData;
-}
-
-/*let {publicKey, privateKey} = generate_key_pair();
-
-
-const data = "my secret data";
-encrypted = encrypt_data(data, publicKey);
-
-console.log("encypted data: ", encrypted.toString("base64"));
-
-const decrypted = decrypt_data(encrypted, privateKey);
-
-console.log("decrypted data: ", decrypted.toString());*/
