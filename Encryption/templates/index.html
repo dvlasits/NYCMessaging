@@ -110,6 +110,23 @@
                 //send the Http request
                 xhr.send("Data from JS")
             }
+
+            function call_setup(){
+                //create XMLHttpRequest object
+                const xhr = new XMLHttpRequest()
+                //open a get request with the remote server URL
+                xhr.open("POST", "/call_brownie", true)
+
+                //EVENT HANDLERS
+
+                //triggered when the response is completed
+                xhr.onload = function() {
+                    console.log(xhr.responseText)
+                }
+
+                //send the Http request
+                xhr.send("Data from JS")
+            }
         </script>
     </head>
     <body>
@@ -121,5 +138,7 @@
       <input type="text" id="decrypt-input"/>
       <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
       <button onclick="call_python()">Call python</button>
+
+      <button onclick="call_setup()">Call setup</button>
     </body>
     </html>
