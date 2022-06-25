@@ -12,43 +12,6 @@
         <script src="./static/metamask_encryption.js"></script>
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script>
-            /*
-            function call_python(){
-                //create XMLHttpRequest object
-                const xhr = new XMLHttpRequest()
-                //open a get request with the remote server URL
-                xhr.open("POST", "/call_python", true)
-
-                //EVENT HANDLERS
-
-                //triggered when the response is completed
-                xhr.onload = function() {
-                    console.log(xhr.responseText)
-                }
-
-                //send the Http request
-                xhr.send("Data from JS")
-            }
-
-            function call_setup(){
-                //create XMLHttpRequest object
-                const xhr = new XMLHttpRequest()
-                //open a get request with the remote server URL
-                xhr.open("POST", "/call_brownie", true)
-
-                //EVENT HANDLERS
-
-                //triggered when the response is completed
-                xhr.onload = function() {
-                    console.log(xhr.responseText);
-                    document.getElementById('setup-btn').textContent  = "Success!";
-                    document.getElementById('setup-btn').style.backgroundColor = "#11bf3d";
-                }
-
-                //send the Http request
-                xhr.send("Data from JS")
-            }
-            */
 
             async function login(){
                 await check_metamask();
@@ -63,7 +26,7 @@
                 document.getElementById('logged-address-value').textContent = account;
             }
 
-            function get_private_key() {
+            function get_encryptor() {
                 // retrieve the encoded private key from contract
                 // decrypt the private key
 
