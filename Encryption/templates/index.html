@@ -7,90 +7,11 @@
         <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
         <script src="{{url_for('static', filename='bundle.js')}}"></script>
         <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+        <script src="{{url_for('static', filename='web3_test.js')}}"></script>
+        <script src="{{url_for('static', filename='metamask_encryption.js')}}"></script>
+        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script>
-
-            let account;
-            let public_key;
-            
-
-            async function check_metamask(){
-                if (window.ethereum) {
-                    window.web3 = new Web3(ethereum);
-                    await ethereum.enable()
-                        .then(() => {
-                            console.log("Ethereum enabled");
-                        })
-                        .catch(() => {
-                            console.warn('User didn\'t allow access to accounts.');
-                            waitLogin();
-                        });
-                } else {
-                    console.log("Non-Ethereum browser detected. You should consider installing MetaMask.");
-                    return;
-                }
-            }
-
-            async function get_account() {
-                await web3.eth.getAccounts(function (err, acc) {
-                    if (err != null) {
-                        self.setStatus("There was an error fetching your accounts");
-                        return;
-                    }
-                    if (acc.length > 0) {
-                        console.log('Accounts:')
-                        console.log(acc);
-
-                        accounts = acc[0];
-                    }
-                    else {
-                        console.error("No account can be accessed.");
-                    }
-                });
-            }
-
-            async function get_public_keys(){
-                await ethereum
-                .request({
-                  method: 'eth_getEncryptionPublicKey',
-                  params: [account], // you must have access to the specified account
-                })
-                .then((result) => {
-                    console.log('The public key for the first account is:')
-                    console.log(result);
-                    public_key = result;
-                })
-                .catch((error) => {
-                  if (error.code === 4001) {
-                    // EIP-1193 userRejectedRequest error
-                    console.log("We can't encrypt anything without the key.");
-                  } else {
-                    console.error(error);
-                  }
-                });
-            }
-
-            function encrypt_wrapper(message) {
-                key = public_keys;
-
-                console.log(my_encrypt)
-
-                encrypted = my_encrypt(key, message);
-
-                console.log(encrypted);
-            }
-
-            function decrypt(message) {
-                ethereum
-                .request({
-                  method: 'eth_decrypt',
-                  params: [message, accounts[0]],
-                })
-                .then((decryptedMessage) =>
-                  console.log('The decrypted message is:', decryptedMessage)
-                )
-                .catch((error) => console.log(error.message));
-            }
-
+            /*
             function call_python(){
                 //create XMLHttpRequest object
                 const xhr = new XMLHttpRequest()
@@ -126,34 +47,58 @@
                 //send the Http request
                 xhr.send("Data from JS")
             }
+            */
 
             async function login(){
                 await check_metamask();
                 await get_account();
-                await get_public_keys();
+                await get_public_key();
 
                 await get_private_key();
 
                 document.getElementById('login-btn').textContent  = "Success!";
                 document.getElementById('login-btn').style.backgroundColor = "#11bf3d";
+
+                document.getElementById('logged-address-value').textContent = account;
             }
 
             async function get_private_key() {
                 // retrieve the encoded private key from contract
                 // decrypt the private key
             }
+
+            function addMessage(message, side){
+                let messages = document.getElementById('received-messages');
+                child = document.createElement("span");
+                child.textContent = message;
+                child.classList.add(side)
+
+                messages.appendChild(child);
+            }
+
+            function sendMessage(){
+                const message = document.getElementById('send-message-input').value;
+                if (message === "") {return;}
+                document.getElementById('send-message-input').value = "";
+                const sides = ['message-right', 'message-left']
+                const index = Math.floor(Math.random() * 2);
+                addMessage(message, sides[index])
+            }
         </script>
     </head>
     <body>
-        <div id="top-buttons">
-            <button id="login-btn" onclick="login()">Log In!</button>
-            <input type="text" id="encrypt-input"/>
-            <button onclick="encrypt_wrapper(document.getElementById('encrypt-input').value)">Encrypt message</button>
-            <input type="text" id="decrypt-input"/>
-            <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
-            <button onclick="call_python()">Call python</button>
-
-            <button id="setup-btn" onclick="call_setup()">Setup</button>
+        <div id="top-container">
+            <div id = "logged-address">
+                <label for="logged-address-value">You are logged in as:</label>
+                <span id="logged-address-value">Not logged in yet</span>
+            </div>
+            <div id="top-buttons">
+                <button id="login-btn" onclick="login()">Log In!</button>
+                <input type="text" id="encrypt-input"/>
+                <button onclick="encrypt_wrapper(document.getElementById('encrypt-input').value)">Encrypt message</button>
+                <input type="text" id="decrypt-input"/>
+                <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
+            </div>
         </div>
 
       <div id="main">
@@ -185,8 +130,8 @@
             <span class="message-left">More messages coming this way</span>
         </div>
         <div id ="write-message">
-            <input type="text"/>
-            <button>Send</button>
+            <input type="text" id="send-message-input"/>
+            <button onclick="sendMessage()">SEND</button>
         </div>
       </div>
     </body>
