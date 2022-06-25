@@ -20,17 +20,15 @@
                 await get_account();
                 await get_public_key();
 
-                await get_encryptor();
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", "/setup", false ); // false for synchronous request
+                xmlHttp.send( null );
+                console.log(xmlHttp.responseText)
 
                 document.getElementById('login-btn').textContent  = "Success!";
                 document.getElementById('login-btn').style.backgroundColor = "#11bf3d";
 
                 document.getElementById('logged-address-value').textContent = account;
-            }
-
-            function get_encryptor() {
-                // retrieve the encoded private key from contract
-                // decrypt the private key
             }
 
             function addMessage(message, side){
