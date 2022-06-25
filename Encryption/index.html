@@ -8,7 +8,7 @@
         <script src="./static/bundle.js"></script>
         <link rel="stylesheet" href="./static/styles.css">
         <script src="./static/web3_test.js"></script>
-        <!--<script src="./static/jsencrypt_bundle.js"></script>-->
+        <script src="./static/jsencrypt_bundle.js"></script>
         <script src="./static/metamask_encryption.js"></script>
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script>
@@ -67,7 +67,7 @@
                 // retrieve the encoded private key from contract
                 // decrypt the private key
 
-                const {pubKey, privKey} = window.generate_key_pair();
+                const {pubKey, privKey} = generate_key_pair();
                 print(pubKey);
             }
 

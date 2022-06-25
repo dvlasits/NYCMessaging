@@ -1,7 +1,7 @@
-const crypto = require("crypto");
+const Crypto = require("crypto");
 
 window.generate_key_pair = () => {
-    const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
+    const { publicKey, privateKey } = Crypto.generateKeyPairSync("rsa", {
         // The standard secure default length for RSA keys is 2048 bits
         modulusLength: 2048,
     });
@@ -10,10 +10,10 @@ window.generate_key_pair = () => {
 }
 
 window.encrypt_data = (data, publicKey) => {
-    const encryptedData = crypto.publicEncrypt(
+    const encryptedData = Crypto.publicEncrypt(
         {
           key: publicKey,
-          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+          padding: Crypto.constants.RSA_PKCS1_OAEP_PADDING,
           oaepHash: "sha256",
         },
         // We convert the data string to a buffer using `Buffer.from`
@@ -24,13 +24,13 @@ window.encrypt_data = (data, publicKey) => {
 }
 
 window.decrypt_data = (data, privateKey) => {
-    const decryptedData = crypto.privateDecrypt(
+    const decryptedData = Crypto.privateDecrypt(
         {
           key: privateKey,
           // In order to decrypt the data, we need to specify the
           // same hashing function and padding scheme that we used to
           // encrypt the data in the previous step
-          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+          padding: Crypto.constants.RSA_PKCS1_OAEP_PADDING,
           oaepHash: "sha256",
         },
         data
