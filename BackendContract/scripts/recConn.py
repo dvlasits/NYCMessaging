@@ -20,15 +20,18 @@ def recConnec(privKey):
         f = open("temp", "rb")
         data = pickle.load(f)
         f.close()
-        data.encryptedNonce = rsa.decrypt(data.encryptedNonce, privKey)
+        try:
+            data.encryptedNonce = rsa.decrypt(data.encryptedNonce, privKey)
+        except rsa.DecryptionError:
+            continue
         if data.encryptedNonce == b"CORRECT":
+            print
             data.encryptedLink = "".join([str(rsa.decrypt(x,privKey))[2:-1] for x in data.encryptedLink])
             path = Path("myConns")
             if not path.is_file():
                 f = open("myConns", "wb")
                 pickle.dump(dict(), f)
                 f.close()
-            print(conns)
             f = open("myConns", "rb")
             conns = pickle.load(f)
             f.close()

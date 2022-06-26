@@ -7,7 +7,7 @@ from scripts.messagingPart import *
 
 
 
-def addObjToTalk(address, privKey):
+def addObjToTalk(address, message2, privKey):
     account = accounts.add(privKey)
     sharer = getContract()
     pubkey = sharer.getPubKey(address)
@@ -18,7 +18,7 @@ def addObjToTalk(address, privKey):
 
     print(pubkey)
 
-    ipnsAddress,_ = createNewIPNS(commFile)
+    ipnsAddress,_ = createNewIPNS(commFile, message2)
 
     ipnsAddress = ipnsAddress.encode("utf8")
     n = 4

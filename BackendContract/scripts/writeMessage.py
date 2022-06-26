@@ -19,6 +19,7 @@ def readMessage(address):
     f = open("myConns", "rb")
     myConns = pickle.load(f)
     f.close()
+    print(myConns)
     ipnsName = myConns[address][0]
     print(ipnsName)
     x = getIPNSVal(ipnsName)

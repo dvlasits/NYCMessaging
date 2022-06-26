@@ -25,8 +25,8 @@ def updateIPNS(hashFile, name):
     return (ipnsAddress,x)
 
 
-def createNewIPNS(nof):
-    val = updateFile(nof, "test")
+def createNewIPNS(nof, message):
+    val = updateFile(nof, message)
     result = subprocess.run(["ipfs", "key", "gen", nof], stdout=subprocess.PIPE)
 
     (ipnsAddress, real) = updateIPNS(val,nof)
