@@ -5,8 +5,8 @@ import base64
 
 app = Flask(__name__)
 
-private_key = "a65c77708018bc98235d266267fed947f87d87405a36f2573ec2e4f37d49fe9e"#"0x952b1d76efd035559bedd3f748d8ef737fc87fdc7efc66285b3fc4770910008f"
-wallet_address = "0x61fF6367537Ab46FccAf06bB9FD05A1b308fb7B6"#"0x66d9fb0Cd2D9103C29fF3a695479875FA422F6A8"
+private_key = "0x952b1d76efd035559bedd3f748d8ef737fc87fdc7efc66285b3fc4770910008f"
+wallet_address = "0x66d9fb0Cd2D9103C29fF3a695479875FA422F6A8"
 
 @app.route("/")
 def index():

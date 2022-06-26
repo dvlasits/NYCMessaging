@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 def recConnec(privKey):
+    print("HOROROR")
     account = accounts.add(privKey)
     sharer = getContract()
     byteArr = sharer.getDataBasic({"from": account})
@@ -25,7 +26,7 @@ def recConnec(privKey):
         except rsa.DecryptionError:
             continue
         if data.encryptedNonce == b"CORRECT":
-            print
+            print("success")
             data.encryptedLink = "".join([str(rsa.decrypt(x,privKey))[2:-1] for x in data.encryptedLink])
             path = Path("myConns")
             if not path.is_file():
