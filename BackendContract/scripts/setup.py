@@ -6,6 +6,7 @@ import rsa
 from os.path import exists
 from pathlib import Path
 import pickle
+from time import sleep
 
 def setup(privKey):
     account = accounts.add(privKey)
@@ -19,6 +20,8 @@ def setup(privKey):
     f = open("privkey", "wb")
     pickle.dump(privkey, f)
     f.close()
+
+    sleep(0.1)
 
     with open("pubkey", "rb") as f:
         sharer.addPublicKey(f.read(), {"from": account})
