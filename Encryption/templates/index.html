@@ -63,15 +63,15 @@
 
             function receive_new_messages() {
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open( "GET", "/get_con", false ); // false for synchronous request
-                xmlHttp.send( null );
+                xmlHttp.open( "POST", "/get_con", false ); // false for synchronous request
+                xmlHttp.send( JSON.stringify({"target_address": target_address}) );
                 console.log(xmlHttp.responseText)
             }
 
             function read_message(){
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "GET", "/read_message", false ); // false for synchronous request
-                xmlHttp.send( null );
+                xmlHttp.send( JSON.stringify({"target_address": target_address}) );
                 console.log(xmlHttp.responseText)
             }
 

@@ -33,9 +33,19 @@ def set_con():
   return "Response from python /set_con"
 
 
-@app.route("/get_con")
+@app.route("/get_con", methods=['POST'])
 def get_con():
+  data = json.loads(request.data)
+  target_address = data['target_address']
+  print(target_address)
+
   os.system(f"cd ../BackendContract && brownie run recConn recConnec {private_key} --network rinkeby")
+  os.system(f"cd ../BackendContract && brownie run writeMessage readMessage {target_address} --network rinkeby")
+
+  with("../BackendContract/textOut.json") as f:
+    data = json.load(f)
+  
+  print(data)
 
   return "Response from python /get_con"
 
