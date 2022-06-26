@@ -53,6 +53,7 @@
 
             function send_message_request() {
                 const message = document.getElementById('send-message-input').value;
+                document.getElementById('send-message-input').value = "";
                 console.log("Address: ", target_address)
 
                 var xmlHttp = new XMLHttpRequest();
