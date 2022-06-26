@@ -42,12 +42,12 @@ def get_con():
   os.system(f"cd ../BackendContract && brownie run recConn recConnec {private_key} --network rinkeby")
   os.system(f"cd ../BackendContract && brownie run writeMessage readMessage {target_address} --network rinkeby")
 
-  with("../BackendContract/textOut.json") as f:
+  with open("../BackendContract/textOut.json") as f:
     data = json.load(f)
   
   print(data)
 
-  return "Response from python /get_con"
+  return json.dumps(data)
 
 @app.route("/read_message")
 def read_message():

@@ -65,6 +65,9 @@
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "POST", "/get_con", false ); // false for synchronous request
                 xmlHttp.send( JSON.stringify({"target_address": target_address}) );
+
+                data = JSON.parse(xmlHttp.responseText);
+                addMessage(data['text'], 'message-left');
                 console.log(xmlHttp.responseText)
             }
 
