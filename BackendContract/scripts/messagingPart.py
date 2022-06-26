@@ -8,6 +8,11 @@ def getIPNSVal(key):
     val = result.stdout
     return val
 
+def getFileVal(val):
+    print(val)
+    result = subprocess.run(["ipfs", "cat", val], stdout=subprocess.PIPE)
+    return result.stdout
+
 def updateFile(name, writing):
     with open(name, "w") as f:
         f.write(writing)
@@ -27,6 +32,8 @@ def updateIPNS(hashFile, name):
 
 def createNewIPNS(nof, message):
     val = updateFile(nof, message)
+    print(val)
+    return val
     result = subprocess.run(["ipfs", "key", "gen", nof], stdout=subprocess.PIPE)
 
     (ipnsAddress, real) = updateIPNS(val,nof)

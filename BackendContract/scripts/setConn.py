@@ -17,10 +17,11 @@ def addObjToTalk(address, message2, privKey):
     commFile = str(address)
 
     print(pubkey)
+    print(message2)
 
-    ipnsAddress,_ = createNewIPNS(commFile, message2)
+    ipnsAddress = createNewIPNS(commFile, message2)
 
-    ipnsAddress = ipnsAddress.encode("utf8")
+    #ipnsAddress = ipnsAddress.encode("utf8")
     n = 4
     chunks = [ipnsAddress[i:i + n] for i in range(0, len(ipnsAddress), n)]
     ipnsAddress = [rsa.encrypt(i, pubkey) for i in chunks]

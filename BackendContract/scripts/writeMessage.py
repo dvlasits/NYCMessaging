@@ -20,11 +20,18 @@ def readMessage(address):
     myConns = pickle.load(f)
     f.close()
     print(myConns)
+
+    ipnsName = myConns[address][0]
+    x = getFileVal(ipnsName)
+    print(x)
+    return x
+
+    """
     ipnsName = myConns[address][0]
     print(ipnsName)
     x = getIPNSVal(ipnsName)
     print(x)
-    return getIPNSVal(ipnsName)
+    return getIPNSVal(ipnsName)"""
 
 
 
