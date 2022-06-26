@@ -1,18 +1,16 @@
 import os
 
-from brownie import Sharer
-from scripts.helpful_scripts import get_account
+from brownie import Sharer, accounts
+from scripts.helpful_scripts import get_account, getContract
 import rsa
 from os.path import exists
 from pathlib import Path
 import pickle
 
-def setup():
-    account = get_account()
-    sharer = Sharer[-1]
+def setup(privKey):
+    account = accounts.add(privKey)
+    sharer = getContract()
     bool = sharer.checkUser({"from": account})
-    if bool:
-        return
     (pubkey, privkey) = rsa.newkeys(256, poolsize=8)
     f = open("pubkey", "wb")
     pickle.dump(pubkey, f)

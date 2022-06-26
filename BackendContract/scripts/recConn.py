@@ -1,19 +1,20 @@
 import rsa
-from brownie import Sharer
-from scripts.helpful_scripts import get_account, loadObject, Data, getObj
+from brownie import Sharer, accounts
+from scripts.helpful_scripts import get_account, loadObject, Data, getObj, getContract
 import pickle
 from scripts.messagingPart import *
 from pathlib import Path
 
 
-
-def recConnec():
-    account = get_account()
-    sharer = Sharer[-1]
+def recConnec(privKey):
+    account = accounts.add(privKey)
+    sharer = getContract()
     byteArr = sharer.getDataBasic({"from": account})
     privKey = getObj("privkey")
     print(privKey)
+    print(len(byteArr))
     for item in byteArr:
+        print("did a loop")
         with open("temp", "wb") as f:
             f.write(item)
         f = open("temp", "rb")
@@ -27,10 +28,12 @@ def recConnec():
                 f = open("myConns", "wb")
                 pickle.dump(dict(), f)
                 f.close()
+            print(conns)
             f = open("myConns", "rb")
             conns = pickle.load(f)
             f.close()
             conns[data.address] = (data.encryptedLink, data.key)
+            print(conns)
             f = open("myConns", "wb")
             pickle.dump(conns, f)
             f.close()

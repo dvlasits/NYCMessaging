@@ -1,6 +1,10 @@
-from brownie import network, config, accounts
+from brownie import network, config, accounts, Sharer
 import pickle
 
+
+def getContract():
+    sharer = Sharer.at('0xe129231629061e60a0f7bF8B8C24D0BE067aF824')
+    return sharer
 
 class Data:
 
