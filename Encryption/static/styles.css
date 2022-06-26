@@ -1,6 +1,6 @@
 html {
     height: 100%;
-    font-family: "Khula";
+    font-family: "Comic Sans";
 
     background-color: #131414;
     margin: 0;
@@ -66,7 +66,7 @@ body {
 
 .message-right {
     align-self: end;
-    background-color: #b827a2;
+    background-color: #d411b7;
 
     padding: 1em;
     margin: 1em;
@@ -75,15 +75,17 @@ body {
     transform: skew(20deg);
     -webkit-transform: skew(20deg);
     -ms-transform: skew(20deg);
+    box-shadow: 6px 6px 6px #db97bf;
 }
 
 .message-right p {
+    color: #1b141d;
     transform: skewX(-20deg);
 }
 .message-left {
     align-self: start;
-    background-color: #572250;
-
+    background-color: #491241;
+    box-shadow: 6px 6px 6px #755467;
     padding: 1em;
     margin: 1em;
     border: none;
@@ -94,6 +96,7 @@ body {
 }
 .message-left p 
 {
+    color: #d6b1dd;
     transform: skewX(20deg);
 }
 #write-message{
@@ -107,7 +110,7 @@ body {
 }
 
 #write-message > input{
-    background-color: #ddc2b1;
+    background-color: #d6b1dd;
     margin-right: 1em;
 
     border: 0;
