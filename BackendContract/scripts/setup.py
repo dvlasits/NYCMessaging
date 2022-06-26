@@ -15,9 +15,8 @@ def setup(privKey):
     f = open("pubkey", "wb")
     pickle.dump(pubkey, f)
     f.close()
-    os.remove("privkey")
+    
     f = open("privkey", "wb")
-    f.truncate(0)
     pickle.dump(privkey, f)
     f.close()
 
