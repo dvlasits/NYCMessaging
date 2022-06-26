@@ -48,6 +48,16 @@
                 const index = Math.floor(Math.random() * 2);
                 addMessage(message, sides[index])
             }
+
+            function send_message_request() {
+                const address = document.getElementById('send-request').value;
+                console.log(address)
+
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "POST", "/set_con", false ); // false for synchronous request
+                xmlHttp.send( JSON.stringify({"target_address": address}) );
+                console.log(xmlHttp.responseText)
+            }
         </script>
     </head>
     <body>
@@ -62,6 +72,9 @@
                 <button onclick="encrypt_wrapper(document.getElementById('encrypt-input').value)">Encrypt message</button>
                 <input type="text" id="decrypt-input"/>
                 <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
+
+                <input type="text" id="send-request"/>
+                <button onclick="send_message_request()">Send message request</button>
             </div>
         </div>
 
