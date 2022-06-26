@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <html>
+    <head>
+        <title>Using web3 API with MetaMask</title>
+
+        <!-- ADD FROM HERE -->
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@walletconnect/browser@1.0.0-beta.46/lib/index.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@walletconnect/qrcode-modal@1.0.0-beta.46/lib/index.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="./static/walletconnect.js"></script>
+        <!-- UNTIL FROM HERE -->
+
+
+        <script src="./static/bundle.js"></script>
+        <link rel="stylesheet" href="./static/styles.css">
+        <script src="./static/web3_test.js"></script>
+        <script src="./static/jsencrypt_bundle.js"></script>
+        <script src="./static/metamask_encryption.js"></script>
+        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+        <script>
+            /*
+            function call_python(){
+                //create XMLHttpRequest object
+                const xhr = new XMLHttpRequest()
+                //open a get request with the remote server URL
+                xhr.open("POST", "/call_python", true)
+
+                //EVENT HANDLERS
+
+                //triggered when the response is completed
+                xhr.onload = function() {
+                    console.log(xhr.responseText)
+                }
+
+                //send the Http request
+                xhr.send("Data from JS")
+            }
+
+            function call_setup(){
+                //create XMLHttpRequest object
+                const xhr = new XMLHttpRequest()
+                //open a get request with the remote server URL
+                xhr.open("POST", "/call_brownie", true)
+
+                //EVENT HANDLERS
+
+                //triggered when the response is completed
+                xhr.onload = function() {
+                    console.log(xhr.responseText);
+                    document.getElementById('setup-btn').textContent  = "Success!";
+                    document.getElementById('setup-btn').style.backgroundColor = "#11bf3d";
+                }
+
+                //send the Http request
+                xhr.send("Data from JS")
+            }
+            */
+
+            async function login(){
+                await check_metamask();
+                await get_account();
+                await get_public_key();
+
+                await get_private_key();
+
+                document.getElementById('login-btn').textContent  = "Success!";
+                document.getElementById('login-btn').style.backgroundColor = "#11bf3d";
+
+                document.getElementById('logged-address-value').textContent = account;
+            }
+
+            function get_private_key() {
+                // retrieve the encoded private key from contract
+                // decrypt the private key
+
+                const {pubKey, privKey} = generate_key_pair();
+                print(pubKey);
+            }
+
+            function addMessage(message, side){
+                let messages = document.getElementById('received-messages');
+                child = document.createElement("span");
+                child.textContent = message;
+                child.classList.add(side)
+
+                messages.appendChild(child);
+            }
+
+            function sendMessage(){
+                const message = document.getElementById('send-message-input').value;
+                if (message === "") {return;}
+                document.getElementById('send-message-input').value = "";
+                const sides = ['message-right', 'message-left']
+                const index = Math.floor(Math.random() * 2);
+                addMessage(message, sides[index])
+            }
+        </script>
+    </head>
+    <body>
+        <div id="top-container">
+            <div id = "logged-address">
+                <label for="logged-address-value">You are logged in as:</label>
+                <span id="logged-address-value">Not logged in yet</span>
+            </div>
+            <div id="top-buttons">
+
+<!-- ADD FROM HERE --> 
+    <div>
+        <table id="data" hidden>
+            <tr>
+                <th>Account</th>
+                <td><span id="account"></span></td>
+            </tr>
+            <tr>
+                <th>ChainID</th>
+                <td><span id="chainId"></span></td>
+            </tr>
+        </table>
+        <hr>
+        <div id="assets" hidden></div>
+    </div>    
+                <button id="connect" onclick="connect()">WalletConnect</button>
+<!-- ADD UNTIL HERE -->
+
+                <button id="login-btn" onclick="login()">MetaMask</button>
+                <input type="text" id="encrypt-input"/>
+                <button onclick="encrypt_wrapper(document.getElementById('encrypt-input').value)">Encrypt message</button>
+                <input type="text" id="decrypt-input"/>
+                <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
+            </div>
+        </div>
+        
+      <div id="main">
+        <div id = "contacts">
+            <div>
+                <span>Address:</span>
+                <span>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
+            </div> 
+            <div>
+                <span>Address:</span>
+                <span>0x7094a738526cC59CdB5E3806700d4Bd1b4f39e56</span>
+            </div> 
+            <div>
+                <span>Address:</span>
+                <span>0xcDFF1e1738121703679bE9839F778bb1f6527E81</span>
+            </div> 
+            <div class="active">
+                <span>Address:</span>
+                <span>0x80b6aBa3e4d22633d56Efa95708381928554A881</span>
+            </div> 
+            <div>
+                <span>Address:</span>
+                <span>0xC137B0AB0256Df59c23a8d31B0852315e16941De</span>
+            </div> 
+        </div>
+        <div id = "received-messages">
+            <span class="message-left">Hi there this is the first message</span>
+            <span class="message-right">Hello this is another messagte there this is the first message</span>
+            <span class="message-left">More messages coming this way</span>
+        </div>
+        <div id ="write-message">
+            <input type="text" id="send-message-input"/>
+            <button onclick="sendMessage()">SEND</button>
+        </div>
+      </div>
+    </body>
+    </html>
