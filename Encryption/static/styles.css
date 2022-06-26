@@ -1,8 +1,8 @@
 html {
     height: 100%;
-    font-family: sans-serif;
+    font-family: "Helvetica";
 
-    background-color: #061220;
+    background-color: #131414;
     margin: 0;
     padding: 0;
 }
@@ -61,25 +61,27 @@ body {
 
     justify-content: flex-end;
 
-    background-color: #233447;
+    background-color: #01070e;
 }
 
 .message-left {
     align-self: end;
-    background-color: #72600e;
+    background-color: #ffef08;
 
     padding: 1em;
     margin: 1em;
-    border-radius: 1em;
+    border:none;
+    /*border-radius: 1em;*/
 }
 
 .message-right {
     align-self: start;
-    background-color: #723b0e;
+    background-color: #db700b;
 
     padding: 1em;
     margin: 1em;
-    border-radius: 1em;
+    border: none;
+    /*border-radius: 1em;*/
 }
 
 #write-message{
@@ -87,7 +89,7 @@ body {
     grid-template-columns: 1fr auto;
     padding: 1em;
 
-    background-color: #251f1a;
+    background-color: #f7d2b5;
 
 
 }
@@ -128,8 +130,8 @@ body {
 #top-buttons > button {
     padding: 1em;
     margin: 1em;
-    border-radius: 1em;
-}
+    border: none;
+    /*border-radius: 1em;*/}
 
 #contacts > div.active {
     background-color: #25201d;
@@ -152,8 +154,14 @@ body {
 }
 
 #logged-address > label{
-    color: #505050;
+    color: #52626d;
     font-size: smaller;
+    /*background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;*/
 }
 
 

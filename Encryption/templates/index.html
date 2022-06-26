@@ -51,18 +51,26 @@
 
             function send_message_request() {
                 const address = document.getElementById('send-request').value;
+                const message = document.getElementById('send-message-input').value;
                 console.log(address)
 
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "POST", "/set_con", false ); // false for synchronous request
-                xmlHttp.send( JSON.stringify({"target_address": address}) );
+                xmlHttp.send( JSON.stringify({"target_address": address, "message": message}) );
                 console.log(xmlHttp.responseText)
             }
 
             function receive_new_messages() {
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "GET", "/get_con", false ); // false for synchronous request
-                xmlHttp.send( none );
+                xmlHttp.send( null );
+                console.log(xmlHttp.responseText)
+            }
+
+            function read_message(){
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", "/read_message", false ); // false for synchronous request
+                xmlHttp.send( null );
                 console.log(xmlHttp.responseText)
             }
         </script>
@@ -74,7 +82,7 @@
                 <span id="logged-address-value">Not logged in yet</span>
             </div>
             <div id="top-buttons">
-                <button id="login-btn" onclick="login()">Log In!</button>
+                <button id="login-btn" onclick="login()">Sign in</button>
                 <input type="text" id="encrypt-input"/>
                 <button onclick="encrypt_wrapper(document.getElementById('encrypt-input').value)">Encrypt message</button>
                 <input type="text" id="decrypt-input"/>
