@@ -53,7 +53,7 @@
 
             function send_message_request() {
                 const message = document.getElementById('send-message-input').value;
-                console.log(address)
+                console.log("Address: ", target_address)
 
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "POST", "/set_con", false ); // false for synchronous request
