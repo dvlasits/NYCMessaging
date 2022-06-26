@@ -25,6 +25,7 @@ def recConnec(privKey):
         except rsa.DecryptionError:
             continue
         if data.encryptedNonce == b"CORRECT":
+            print
             data.encryptedLink = "".join([str(rsa.decrypt(x,privKey))[2:-1] for x in data.encryptedLink])
             path = Path("myConns")
             if not path.is_file():
