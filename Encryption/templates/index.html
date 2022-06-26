@@ -15,8 +15,6 @@
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>-->
         <script>
 
-            target_address = null;
-            
             async function login(){
                 await check_metamask();
                 await get_account();
@@ -52,52 +50,32 @@
             }
 
             function send_message_request() {
+                const address = document.getElementById('send-request').value;
                 const message = document.getElementById('send-message-input').value;
-                console.log("Address: ", target_address)
+                console.log(address)
 
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "POST", "/set_con", false ); // false for synchronous request
-                xmlHttp.send( JSON.stringify({"target_address": target_address, "message": message}) );
+                xmlHttp.send( JSON.stringify({"target_address": address, "message": message}) );
                 console.log(xmlHttp.responseText)
             }
 
             function receive_new_messages() {
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open( "POST", "/get_con", false ); // false for synchronous request
-                xmlHttp.send( JSON.stringify({"target_address": target_address}) );
-
-                data = JSON.parse(xmlHttp.responseText);
-                addMessage(data['text'], 'message-left');
+                xmlHttp.open( "GET", "/get_con", false ); // false for synchronous request
+                xmlHttp.send( null );
                 console.log(xmlHttp.responseText)
             }
 
             function read_message(){
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "GET", "/read_message", false ); // false for synchronous request
-                xmlHttp.send( JSON.stringify({"target_address": target_address}) );
+                xmlHttp.send( null );
                 console.log(xmlHttp.responseText)
-            }
-
-            function change_target_wallet(e){
-                var caller = e.target || e.srcElement;
-
-                if (caller instanceof HTMLSpanElement){
-                    caller = caller.parentElement;
-                }
-
-                const contacts = document.getElementById('contacts');
-                for (let i = 0; i < contacts.children.length; i++) {
-                    let child = contacts.children[i];
-
-                    child.classList.remove('active')
-                }
-                console.log(caller)
-                caller.classList.add('active');
-
-                target_address = caller.children[1].textContent;
             }
         </script>
     </head>
+    <link href='https://fonts.googleapis.com/css?family=Khula' rel='stylesheet'>  
     <body>
         <div id="top-container">
             <div id = "logged-address">
@@ -106,6 +84,13 @@
             </div>
             <div id="top-buttons">
                 <button id="login-btn" onclick="login()">Sign in</button>
+                <input type="text" id="encrypt-input"/>
+                <button onclick="encrypt_wrapper(document.getElementById('encrypt-input').value)">Encrypt message</button>
+                <input type="text" id="decrypt-input"/>
+                <button onclick="decrypt(document.getElementById('decrypt-input').value)">Decrypt message</button>
+
+                <input type="text" id="send-request" value="0x66d9fb0Cd2D9103C29fF3a695479875FA422F6A8"/>
+                <button onclick="send_message_request()">Send message request</button>
 
                 <button onclick="receive_new_messages()">Receive new messages</button>
             </div>
@@ -113,35 +98,35 @@
 
       <div id="main">
         <div id = "contacts">
-            <div onclick="change_target_wallet(event)">
-                <span>Address (Jan):</span>
-                <span>0x61fF6367537Ab46FccAf06bB9FD05A1b308fb7B6</span>
+            <div>
+                <span>Address:</span>
+                <span>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
             </div> 
-            <div onclick="change_target_wallet(event)">
-                <span>Address (Daniel):</span>
-                <span>0x66d9fb0Cd2D9103C29fF3a695479875FA422F6A8</span>
+            <div>
+                <span>Address:</span>
+                <span>0x7094a738526cC59CdB5E3806700d4Bd1b4f39e56</span>
             </div> 
-            <div onclick="change_target_wallet(event)">
+            <div>
                 <span>Address:</span>
                 <span>0xcDFF1e1738121703679bE9839F778bb1f6527E81</span>
             </div> 
-            <div class="active" onclick="change_target_wallet(event)">
+            <div class="active">
                 <span>Address:</span>
                 <span>0x80b6aBa3e4d22633d56Efa95708381928554A881</span>
             </div> 
-            <div onclick="change_target_wallet(event)">
+            <div>
                 <span>Address:</span>
                 <span>0xC137B0AB0256Df59c23a8d31B0852315e16941De</span>
             </div> 
         </div>
         <div id = "received-messages">
-            <span class="message-left">Hi there this is the first message</span>
-            <span class="message-right">Hello this is another messagte there this is the first message</span>
-            <span class="message-left">More messages coming this way</span>
+            <span class="message-left"> <p> Hi there, this is the first message </p></span>
+            <span class="message-right"> <p>Hello, this is another message! How are you doing today?  </p> </span>
+            <span class="message-left"> <p> All good. More messages coming your way. </p> </span>
         </div>
         <div id ="write-message">
             <input type="text" id="send-message-input"/>
-            <button onclick="send_message_request()">SEND</button>
+            <button onclick="sendMessage()">SEND</button>
         </div>
       </div>
     </body>

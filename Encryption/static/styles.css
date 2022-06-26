@@ -1,6 +1,6 @@
 html {
     height: 100%;
-    font-family: "Helvetica";
+    font-family: "Khula";
 
     background-color: #131414;
     margin: 0;
@@ -47,7 +47,7 @@ body {
     padding: 1em;
     border-radius: 0.5em;
 
-    background-color: #a0a0a0;
+    background-color: #4d1b53;
 
     cursor: pointer;
 }
@@ -64,32 +64,44 @@ body {
     background-color: #01070e;
 }
 
-.message-left {
+.message-right {
     align-self: end;
-    background-color: #ffef08;
+    background-color: #b827a2;
 
     padding: 1em;
     margin: 1em;
     border:none;
-    /*border-radius: 1em;*/
+    border-radius: 0.5em;
+    transform: skew(20deg);
+    -webkit-transform: skew(20deg);
+    -ms-transform: skew(20deg);
 }
 
-.message-right {
+.message-right p {
+    transform: skewX(-20deg);
+}
+.message-left {
     align-self: start;
-    background-color: #db700b;
+    background-color: #572250;
 
     padding: 1em;
     margin: 1em;
     border: none;
-    /*border-radius: 1em;*/
+    border-radius: 0.5em;
+    transform: skew(-20deg);
+    -webkit-transform: skew(-20deg);
+    -ms-transform: skew(-20deg);
 }
-
+.message-left p 
+{
+    transform: skewX(20deg);
+}
 #write-message{
     display: grid;
     grid-template-columns: 1fr auto;
     padding: 1em;
 
-    background-color: #f7d2b5;
+    background-color: #efb5f7;
 
 
 }
@@ -107,7 +119,7 @@ body {
 }
 
 #write-message > button {
-    background-color: #df730e;
+    background-color: #6e1546;
     padding: 0.5em;
     border-radius: 0.5em;
 
@@ -131,17 +143,18 @@ body {
     padding: 1em;
     margin: 1em;
     border: none;
-    /*border-radius: 1em;*/}
+    border-radius: 1em;
+}
 
 #contacts > div.active {
-    background-color: #25201d;
+    background-color: #deb6e4;
 }
 
 #top-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    background-color: #e4761b;
+    background-color: #5f0e3d;
 }
 
 #logged-address{
@@ -154,7 +167,7 @@ body {
 }
 
 #logged-address > label{
-    color: #52626d;
+    color: #5e425e;
     font-size: smaller;
     /*background-color: transparent;
     background-repeat: no-repeat;
