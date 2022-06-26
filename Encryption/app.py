@@ -23,6 +23,14 @@ def set_con():
 
   print(target_address)
 
+  print(f"cd ../BackendContract && brownie run setConn addObjToTalk {target_address} {private_key} --network rinkeby")
   os.system(f"cd ../BackendContract && brownie run setConn addObjToTalk {target_address} {private_key} --network rinkeby")
 
   return "Response from python /set_con"
+
+
+@app.route("/get_con")
+def setup():
+  os.system(f"cd ../BackendContract && brownie run setup setup {private_key} --network rinkeby")
+
+  return "Response from python /setup"
