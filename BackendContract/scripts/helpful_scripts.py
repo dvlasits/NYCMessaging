@@ -3,7 +3,8 @@ import pickle
 
 
 def getContract():
-    sharer = Sharer.at('0xe129231629061e60a0f7bF8B8C24D0BE067aF824')
+    sharer = Sharer.at('0x7Ed76b3Df27Fd6580e29d5536219536b4062Ac1E')
+    # For Polygon: 0xf512335edAC6F44043d4C986c4b59529382e3c84
     return sharer
 
 class Data:
@@ -21,9 +22,6 @@ def getObj(name):
     omj = pickle.load(f)
     f.close()
     return omj
-
-
-
 
 def get_account():
     print("here")

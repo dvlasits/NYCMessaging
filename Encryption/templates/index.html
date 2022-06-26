@@ -3,6 +3,10 @@
     <meta content="utf-8" http-equiv="encoding">
     <html>
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cousine&display=swap" rel="stylesheet"> 
         <title>Using web3 API with MetaMask</title>
 
         <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
@@ -34,7 +38,7 @@
                 xmlHttp.send( null );
                 console.log(xmlHttp.responseText)
 
-                document.getElementById('login-btn').textContent  = "Success!";
+                document.getElementById('login-btn').textContent  = "Signed in";
                 document.getElementById('login-btn').style.backgroundColor = "#11bf3d";
 
                 document.getElementById('logged-address-value').textContent = account;
@@ -147,8 +151,8 @@
                 <span>0x66d9fb0Cd2D9103C29fF3a695479875FA422F6A8</span>
             </div> 
             <div onclick="change_target_wallet(event)">
-                <span>Address:</span>
-                <span>0xcDFF1e1738121703679bE9839F778bb1f6527E81</span>
+                <span>Address (Kalina):</span>
+                <span>0x8fE2CE4C927C926cb7c97deeD8386a05710553D1</span>
             </div> 
             <div class="active" onclick="change_target_wallet(event)">
                 <span>Address:</span>
@@ -160,13 +164,14 @@
             </div> 
         </div>
         <div id = "received-messages">
-            <span class="message-left">Hi there this is the first message</span>
-            <span class="message-right">Hello this is another messagte there this is the first message</span>
-            <span class="message-left">More messages coming this way</span>
+            <span class="message-left"> <p> Hi there, this is the first message </p></span>
+            <span class="message-right"> <p> Hey, message received. How are you? </p></span>
+            <span class="message-left"> <p> All good. More messages coming your way </p></span>
         </div>
         <div id ="write-message">
             <input type="text" id="send-message-input"/>
-            <button onclick="send_message_request()">SEND</button>
+            <button onclick="send_message_request()"> ENTER <i class="fa-solid fa-paper-plane-top"></i> 
+            </button>
         </div>
       </div>
     </body>
