@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import os
 import json
+import base64
 
 app = Flask(__name__)
 
@@ -21,11 +22,12 @@ def setup():
 def set_con():
   data = json.loads(request.data)
   target_address = data['target_address']
-  message = data['message'].replace(' ', '_')
+  message = data['message']
+
+  message = base64.b64encode(message.encode('utf-8')).decode('ascii')
 
   print(target_address)
   print(f'message: {message}')
-
 
   print(f"cd ../BackendContract && brownie run setConn addObjToTalk {target_address} {message} {private_key} --network rinkeby")
   os.system(f"cd ../BackendContract && brownie run setConn addObjToTalk {target_address} {message} {private_key} --network rinkeby")
@@ -46,6 +48,8 @@ def get_con():
     data = json.load(f)
   
   print(data)
+
+  data['text'] = base64.b64decode(data['text'].encode('ascii')).decode('utf-8')
 
   return json.dumps(data)
 
