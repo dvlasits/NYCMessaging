@@ -4,6 +4,13 @@
     <html>
     <head>
         <title>Using web3 API with MetaMask</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@walletconnect/browser@1.0.0-beta.46/lib/index.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@walletconnect/qrcode-modal@1.0.0-beta.46/lib/index.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="./static/walletconnect.js"></script>
+
         <link rel="stylesheet" href="./static/styles.css">
 
         <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
@@ -106,6 +113,23 @@
                 <span id="logged-address-value">Not logged in yet</span>
             </div>
             <div id="top-buttons">
+
+                    <div>
+        <table id="data" hidden>
+            <tr>
+                <th>Account</th>
+                <td><span id="account"></span></td>
+            </tr>
+            <tr>
+                <th>ChainID</th>
+                <td><span id="chainId"></span></td>
+            </tr>
+        </table>
+        <hr>
+        <div id="assets" hidden></div>
+    </div>
+                <button id="connect" onclick="connect()">WalletConnect</button>
+
                 <button id="login-btn" onclick="login()">Sign in</button>
 
                 <button onclick="receive_new_messages()">Receive new messages</button>
