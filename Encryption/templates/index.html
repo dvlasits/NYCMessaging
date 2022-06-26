@@ -47,8 +47,10 @@
             function addMessage(message, side){
                 let messages = document.getElementById('received-messages');
                 child = document.createElement("span");
-                child.textContent = message;
+                inner = document.createElement("p");
+                inner.textContent = message;
                 child.classList.add(side)
+                child.appendChild(inner)
 
                 messages.appendChild(child);
             }

@@ -5,8 +5,8 @@ import base64
 
 app = Flask(__name__)
 
-private_key = "0x952b1d76efd035559bedd3f748d8ef737fc87fdc7efc66285b3fc4770910008f"
-wallet_address = "0x66d9fb0Cd2D9103C29fF3a695479875FA422F6A8"
+private_key = "0xa65c77708018bc98235d266267fed947f87d87405a36f2573ec2e4f37d49fe9e"
+wallet_address = "0x61fF6367537Ab46FccAf06bB9FD05A1b308fb7B6"
 
 network = "rinkeby" #"boba-test"
 
@@ -25,14 +25,14 @@ def set_con():
   data = json.loads(request.data)
   target_address = data['target_address']
   message = data['message']
-
   message = base64.b64encode(message.encode('utf-8')).decode('ascii')
 
   print(target_address)
   print(f'message: {message}')
 
-  print(f"cd ../BackendContract && brownie run setConn addObjToTalk {target_address} {message} {private_key} --network {network}")
-  os.system(f"cd ../BackendContract && brownie run setConn addObjToTalk {target_address} {message} {private_key} --network {network}")
+  x = f"cd ../BackendContract && brownie run setConn addObjToTalk {target_address} {message} {private_key} --network {network}"
+  print(x)
+  os.system(x)
 
   return "Response from python /set_con"
 
