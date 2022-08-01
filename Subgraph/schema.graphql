@@ -1,0 +1,4 @@
+type Post @entity {
+  id: ID!
+  sender: Bytes! # address
+}
