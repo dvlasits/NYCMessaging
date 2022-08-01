@@ -32,4 +32,4 @@ yarn-error.log*
 .vercel
 
 #subgraph node-modules
-./social-dapp/node_modules
+./Subgraph/node_modules
